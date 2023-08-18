@@ -420,17 +420,17 @@ class BatchApi
 
             switch($statusCode) {
                 case 201:
-                    if ('\HubSpot\Client\Crm\LineItems\Model\BatchResponseSimplePublicObject' === '\SplFileObject') {
+                    if ('\HubSpot\Client\Crm\LineItems\Model\BatchResponseSimplePublicObjectWithErrors' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\HubSpot\Client\Crm\LineItems\Model\BatchResponseSimplePublicObject' !== 'string') {
+                        if ('\HubSpot\Client\Crm\LineItems\Model\BatchResponseSimplePublicObjectWithErrors' !== 'string') {
                             $content = json_decode($content);
                         }
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\HubSpot\Client\Crm\LineItems\Model\BatchResponseSimplePublicObject', []),
+                        ObjectSerializer::deserialize($content, '\HubSpot\Client\Crm\LineItems\Model\BatchResponseSimplePublicObjectWithErrors', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
